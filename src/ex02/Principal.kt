@@ -9,6 +9,24 @@ fun main() {
     println("Quer criar quantos televisores? ")
     val x = entrada.nextInt()
 
+    val televisor1 = Televisor(false, 10)
+    televisor1.ligar()
+    val canal1 = Canal(2, "Globo")
+    val canal2 = Canal(13, "Cultura")
+    val canal3 = Canal(9, "SBT")
+    televisor1.adicionarCanal(canal1)
+    televisor1.adicionarCanal(canal2)
+    televisor1.adicionarCanal(canal3)
+
+    televisor1.imprimir()
+    televisor1.criarCanal()
+    televisor1.canalAcima()
+    televisor1.imprimir()
+    televisor1.removerCanal(canal2)
+    televisor1.imprimir()
+    televisor1.canalAbaixo()
+    televisor1.desligar()
+
     repeat(x) {
         val televisor = Televisor()
         do {
@@ -21,13 +39,13 @@ fun main() {
                 "ligar" -> {
                     televisor.ligar()
                     println("\nPor favor adicione um canal")
-                    televisor.adicionarCanal(televisor)
+                    televisor.criarCanal()
                     do {
                         println("\nDeseja criar e adicionar mais canais?\nSim - Não")
                         var simNao = entrada.next()
                         when (simNao) {
                             "Sim" -> {
-                                televisor.adicionarCanal(televisor)
+                                televisor.criarCanal()
                             }
                             "Não" -> {
                                 do {

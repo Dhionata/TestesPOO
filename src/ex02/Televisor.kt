@@ -1,5 +1,6 @@
 package ex02
 
+
 class Televisor(
     private var estado: Boolean = false,
     var volume: Byte = 0
@@ -9,20 +10,20 @@ class Televisor(
     private var canal = Canal()
 
     private fun canais() {
-        println("\n-- Canais instalados --\n[Nome | Número]")
+        println("-- Canais instalados --\n[Nome | Número]")
         canais.forEach {
             println("${it.nome} | ${it.numero}")
         }
     }
 
     fun imprimir() {
-        println(
-            "\nEstado: ${if (estado) {
-                "ligada \nCanal: $canal\nVolume: $volume\n${canais()}"
-            } else {
-                "desligada"
-            }}"
-        )
+        if (estado) {
+            println("\nTV Ligada")
+            canal.imprimirCanal()
+            canais()
+        } else {
+            println("\nTV Desligada")
+        }
     }
 
     fun ligar() {
@@ -35,7 +36,16 @@ class Televisor(
         println("\nDesligando...")
     }
 
-    fun adicionarCanal(t: Televisor) {
+    fun adicionarCanal(c: Canal) {
+        if (canal.numero == (-1).toByte()) {
+            canal = c
+            println("Canal Definido!")
+            canal.imprimirCanal()
+        }
+        canais.add(c)
+    }
+
+    fun criarCanal() {
         var canal1: Canal
         do {
             println("\nInforme o nome do canal: ")
@@ -43,20 +53,23 @@ class Televisor(
             println("\nPor favor informe o número: ")
             val numero1 = entrada.nextByte()
             canal1 = Canal(numero1, nome1)
-            t.canais.add(canal1)
+            adicionarCanal(canal1)
             if (canal1.nome.isEmpty()) {
                 println("\nPor favor preencha corretamente todos os campos!")
             }
         } while (canal1.nome.isEmpty())
-
-        println("\nCanal adicionado:\nNome: ${canal1.nome}\nNúmero: ${canal1.numero}")
+        println("\nCanal adicionado:")
+        canal1.imprimirCanal()
         canais()
     }
 
     fun removerCanal(canal: Canal) {
         try {
+            if (canal == this.canal) {
+                this.canal = canais[0]
+            }
             canais.remove(canal)
-            println("\nCanal removido com sucesso!")
+            println("\nCanal '${canal.nome}' removido com sucesso!")
         } catch (ex: Throwable) {
             println("\nNão deu pra remover esse canal: $ex")
         }
@@ -64,13 +77,16 @@ class Televisor(
 
     fun canalAcima() {
         if (canais.isNotEmpty()) {
-            val interada: Iterator<Canal> = canais.iterator()
-            canal = if (interada.hasNext()) {
-                interada.next()
-            } else {
-                canais[0]
+            val it: Iterator<Canal> = canais.iterator()
+            while (it.hasNext()) {
+                val x: Canal = it.next()
+                if (x == canal) {
+                    canal = it.next()
+                    canal.imprimirCanal()
+                    println("canal acima definido")
+                    break
+                }
             }
-            println("\n--Canal--\nNome | Número\n${canal.nome} | ${canal.numero}")
         } else {
             println("\nLista de canais vazia!")
         }
@@ -78,13 +94,16 @@ class Televisor(
 
     fun canalAbaixo() {
         if (canais.isNotEmpty()) {
-            val interada: ListIterator<Canal> = canais.listIterator()
-            canal = if (interada.hasPrevious()) {
-                interada.previous()
-            } else {
-                canais[0]
+            val it = canais.listIterator()
+            while (it.hasPrevious()) {
+                val x: Canal = it.previous()
+                if (x == canal) {
+                    canal = it.next()
+                    canal.imprimirCanal()
+                    println("canal acima definido")
+                    break
+                }
             }
-            println("\n--Canal--\nNome | Número\n${canal.nome} | ${canal.numero}")
         } else {
             println("\nLista de canais vazia!")
         }

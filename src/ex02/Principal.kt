@@ -25,6 +25,8 @@ fun main() {
     televisor1.removerCanal(canal2)
     televisor1.imprimir()
     televisor1.canalAbaixo()
+    televisor1.volumeAcima()
+    televisor1.volumeAbaixo()
     televisor1.desligar()
 
     repeat(x) {
@@ -38,7 +40,7 @@ fun main() {
                 }
                 "ligar" -> {
                     televisor.ligar()
-                    println("\nPor favor adicione um canal")
+                    println("Por favor adicione um canal")
                     televisor.criarCanal()
                     do {
                         println("\nDeseja criar e adicionar mais canais?\nSim - Não")
@@ -50,9 +52,9 @@ fun main() {
                             "Não" -> {
                                 do {
                                     println("\nInforme o volume da televisão: ")
-                                    val volume = entrada.nextInt()
+                                    val volume = entrada.nextByte()
                                     if (volume in 0..80) {
-                                        televisor.volume = volume.toByte()
+                                        televisor.volume = volume
                                     } else {
                                         println("\nDigite um valor de 0 à 80")
                                         televisor.volume = -1

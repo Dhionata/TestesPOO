@@ -77,13 +77,12 @@ class Televisor(
 
     fun canalAcima() {
         if (canais.isNotEmpty()) {
-            val it: Iterator<Canal> = canais.iterator()
+            val it = canais.listIterator()
             while (it.hasNext()) {
-                val x: Canal = it.next()
-                if (x == canal) {
+                if (canal == it.next()) {
                     canal = it.next()
+                    println("Canal Definido")
                     canal.imprimirCanal()
-                    println("canal acima definido")
                     break
                 }
             }
@@ -96,11 +95,10 @@ class Televisor(
         if (canais.isNotEmpty()) {
             val it = canais.listIterator()
             while (it.hasPrevious()) {
-                val x: Canal = it.previous()
-                if (x == canal) {
-                    canal = it.next()
+                if (canal == it.previous()) {
+                    canal = it.previous()
+                    println("Canal Definido")
                     canal.imprimirCanal()
-                    println("canal acima definido")
                     break
                 }
             }

@@ -76,34 +76,46 @@ class Televisor(
     }
 
     fun canalAcima() {
-        if (canais.isNotEmpty()) {
-            val it = canais.listIterator()
-            while (it.hasNext()) {
-                if (canal == it.next()) {
-                    canal = it.next()
-                    println("Canal Definido")
-                    canal.imprimirCanal()
-                    break
+        when {
+            canais.size > 1 -> {
+                canais.forEachIndexed { index, canal2 ->
+                    if (canal2 == this.canal) {
+                        if (index + 1 <= canais.size) {
+                            this.canal = canais[index + 1]
+                        } else {
+                            this.canal = canais[0]
+                        }
+                    }
                 }
             }
-        } else {
-            println("\nLista de canais vazia!")
+            canais.size == 1 -> {
+                println("\nSó tem um canal instalado...")
+            }
+            else -> {
+                println("\nLista de canais Vazia!")
+            }
         }
     }
 
     fun canalAbaixo() {
-        if (canais.isNotEmpty()) {
-            val it = canais.listIterator()
-            while (it.hasPrevious()) {
-                if (canal == it.previous()) {
-                    canal = it.previous()
-                    println("Canal Definido")
-                    canal.imprimirCanal()
-                    break
+        when {
+            canais.size > 1 -> {
+                canais.forEachIndexed { index, canal ->
+                    if (canal == this.canal) {
+                        if (canais[index - 1] != null) {
+                            this.canal = canais[index - 1]
+                        } else {
+                            this.canal = canais[canais.lastIndex]
+                        }
+                    }
                 }
             }
-        } else {
-            println("\nLista de canais vazia!")
+            canais.size == 1 -> {
+                println("\nSó tem um canal instalado...")
+            }
+            else -> {
+                println("\nLista de canais Vazia!")
+            }
         }
     }
 

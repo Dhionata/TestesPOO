@@ -60,7 +60,6 @@ class Televisor(
         } while (canal1.nome.isEmpty())
         println("\nCanal adicionado:")
         canal1.imprimirCanal()
-        canais()
     }
 
     fun removerCanal(canal: Canal) {
@@ -78,13 +77,16 @@ class Televisor(
     fun canalAcima() {
         when {
             canais.size > 1 -> {
-                canais.forEachIndexed { index, canal2 ->
-                    if (canal2 == this.canal) {
-                        if (index + 1 <= canais.size) {
-                            this.canal = canais[index + 1]
+                for (canal in canais) {
+                    if (canal == this.canal) {
+                        if (canal != canais[canais.size - 1]) {
+                            this.canal = canais[canais.indexOf(canal) + 1]
                         } else {
-                            this.canal = canais[0]
+                            this.canal = canais.first()
                         }
+                        println("\n-- Canal Acima --")
+                        this.canal.imprimirCanal()
+                        break
                     }
                 }
             }
@@ -100,16 +102,20 @@ class Televisor(
     fun canalAbaixo() {
         when {
             canais.size > 1 -> {
-                canais.forEachIndexed { index, canal ->
+                for (canal in canais) {
                     if (canal == this.canal) {
-                        if (canais[index - 1] != null) {
-                            this.canal = canais[index - 1]
+                        if (canal != canais[0]) {
+                            this.canal = canais[canais.indexOf(canal) - 1]
                         } else {
-                            this.canal = canais[canais.lastIndex]
+                            this.canal = canais.last()
                         }
+                        println("\n-- Canal Abaixo --")
+                        this.canal.imprimirCanal()
+                        break
                     }
                 }
             }
+
             canais.size == 1 -> {
                 println("\nSó tem um canal instalado...")
             }

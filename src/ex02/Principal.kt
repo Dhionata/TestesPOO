@@ -9,7 +9,7 @@ fun main() {
     println("Quer criar quantos televisores? ")
     val x = entrada.nextInt()
 
-    val televisor1 = Televisor(false, 10)
+    val televisor1 = Televisor(false)
     televisor1.ligar()
     val canal1 = Canal(2, "Globo")
     val canal2 = Canal(13, "Cultura")

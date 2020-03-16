@@ -1,9 +1,8 @@
 package ex02
 
-
 class Televisor(
     private var estado: Boolean = false,
-    var volume: Byte = 0
+    var volume: Byte = 20
 ) {
 
     private val canais = mutableListOf<Canal>()
@@ -77,17 +76,10 @@ class Televisor(
     fun canalAcima() {
         when {
             canais.size > 1 -> {
-                for (canal in canais) {
-                    if (canal == this.canal) {
-                        if (canal != canais[canais.size - 1]) {
-                            this.canal = canais[canais.indexOf(canal) + 1]
-                        } else {
-                            this.canal = canais.first()
-                        }
-                        println("\n-- Canal Acima --")
-                        this.canal.imprimirCanal()
-                        break
-                    }
+                canal = if (canal != canais.last()) {
+                    canais[canais.indexOf(canal) + 1]
+                } else {
+                    canais.first()
                 }
             }
             canais.size == 1 -> {
@@ -102,20 +94,12 @@ class Televisor(
     fun canalAbaixo() {
         when {
             canais.size > 1 -> {
-                for (canal in canais) {
-                    if (canal == this.canal) {
-                        if (canal != canais[0]) {
-                            this.canal = canais[canais.indexOf(canal) - 1]
-                        } else {
-                            this.canal = canais.last()
-                        }
-                        println("\n-- Canal Abaixo --")
-                        this.canal.imprimirCanal()
-                        break
-                    }
+                canal = if (canal != canais.first()) {
+                    canais[canais.indexOf(canal) - 1]
+                } else {
+                    canais.last()
                 }
             }
-
             canais.size == 1 -> {
                 println("\nSó tem um canal instalado...")
             }

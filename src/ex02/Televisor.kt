@@ -81,6 +81,8 @@ class Televisor(
                 } else {
                     canais.first()
                 }
+                println("\n-- Canal Alterado+ --")
+                canal.imprimirCanal()
             }
             canais.size == 1 -> {
                 println("\nSó tem um canal instalado...")
@@ -99,6 +101,8 @@ class Televisor(
                 } else {
                     canais.last()
                 }
+                println("\n-- Canal Alterado- --")
+                canal.imprimirCanal()
             }
             canais.size == 1 -> {
                 println("\nSó tem um canal instalado...")

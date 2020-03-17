@@ -4,32 +4,8 @@ import java.util.Scanner
 
 val entrada: Scanner = Scanner(System.`in`)
 fun main() {
-
-    val televisoes = mutableListOf<Televisor>()
-    println("Quer criar quantos televisores? ")
-    val x = entrada.nextInt()
-
-    val televisor1 = Televisor(false)
-    televisor1.ligar()
-    val canal1 = Canal(2, "Globo")
-    val canal2 = Canal(13, "Cultura")
-    val canal3 = Canal(9, "SBT")
-    televisor1.adicionarCanal(canal1)
-    televisor1.adicionarCanal(canal2)
-    televisor1.adicionarCanal(canal3)
-
-    televisor1.imprimir()
-    televisor1.criarCanal()
-    televisor1.canalAcima()
-    televisor1.imprimir()
-    televisor1.removerCanal(canal2)
-    televisor1.imprimir()
-    televisor1.canalAbaixo()
-    televisor1.volumeAcima()
-    televisor1.volumeAbaixo()
-    televisor1.desligar()
-
-    repeat(x) {
+    val televisores = mutableListOf<Televisor>()
+    do {
         val televisor = Televisor()
         do {
             println("\nDeseja ligar ou desligar?")
@@ -157,6 +133,8 @@ fun main() {
                 }
             }
         } while (y != "ligada" && y != "desligada")
-        televisoes.add(televisor)
-    }
+        televisores.add(televisor)
+        println("deseja criar mais um televisor?\n1 - Sim\n0 - Não")
+        val cod = entrada.nextInt()
+    } while (cod != 0)
 }

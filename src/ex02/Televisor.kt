@@ -35,7 +35,7 @@ class Televisor(
         println("\nDesligando...")
     }
 
-    fun adicionarCanal(c: Canal) {
+    private fun adicionarCanal(c: Canal) {
         if (canal.numero == (-1).toByte()) {
             canal = c
             println("Canal Definido!")

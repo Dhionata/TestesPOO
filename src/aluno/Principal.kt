@@ -1,4 +1,4 @@
-package Aluno
+package aluno
 
 import java.util.Scanner
 

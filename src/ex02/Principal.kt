@@ -32,6 +32,7 @@ fun main() {
 										televisor.volume = volume
 									} else {
 										println("\nDigite um valor de 0 à 80")
+										JOptionPane.showMessageDialog(null, "Digite um valor de 0 à 80")
 										televisor.volume = -1
 									}
 								} while (televisor.volume.toInt() == -1)
@@ -54,6 +55,7 @@ fun main() {
 														}
 														else -> {
 															println("tente novamente...")
+															JOptionPane.showMessageDialog(null, "Tente novamente...")
 															aumentarDiminuir = null
 														}
 													}
@@ -91,6 +93,10 @@ fun main() {
 																		}
 																		else -> {
 																			println("\nTenho que aprender outros idiomas...")
+																			JOptionPane.showMessageDialog(
+																				null,
+																				"Tenho que aprender outros idiomas..."
+																			)
 																		}
 																	}
 																}
@@ -99,6 +105,7 @@ fun main() {
 															)
 														} catch (E: Exception) {
 															println(E.message)
+															JOptionPane.showMessageDialog(null, E.message)
 														}
 													}
 													"Não" -> {
